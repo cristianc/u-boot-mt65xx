@@ -1,0 +1,93 @@
+#!/bin/sh -e
+# shellcheck disable=SC2039,SC2155
+# Copyright 2018 Oliver Smith
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+script="$(basename "$0")"
+label="$1"
+input="$2"
+output="$3"
+temp=""
+
+
+# $1: argument count
+check_arguments() {
+	if [ "$1" -ne 3 ]; then
+		echo "usage: $script LABEL INPUT OUTPUT"
+		exit 1
+	fi
+	if ! [ -e "$input" ]; then
+		echo "File not found: $input"
+		exit 1
+	fi
+	if [ -e "$output" ]; then
+		echo "Output file already exists: $output"
+		exit 1
+	fi
+}
+
+
+write_identifier() {
+	printf '\x88\x16\x88\x58' >> "$temp"
+}
+
+
+# $1: new file size
+# $2: padding character code (377 for 0xFF, 000 for 0x00)
+write_padding() {
+	# Missing byte count
+	local old="$(stat -c%s "$temp")"
+	local count="$(($1 - old))"
+
+	# Write to file
+	# This uses printf to generate $count white spaces, then replaces them with
+	# the desired character. shellcheck disable=SC2059
+	printf "%0${count}s" "" | tr " " "\\$2" >> "$temp"
+}
+
+
+write_size() {
+	# File size as hexadecimal number
+	local int="$(stat -c%s "$input")"
+	local hex="$(printf '%x' "$int")"
+
+	# Format string with reversed byte order
+	local split="$(echo "$hex" | sed 's/.\{2\}/& /g')"
+	local formatstring=""
+	for byte in $split; do
+		formatstring="\\x$byte$formatstring"
+	done
+
+	# shellcheck disable=SC2059
+	printf "$formatstring" >> "$temp"
+	write_padding "8" "000"
+}
+
+
+write_label() {
+	printf "%s" "$label" >> "$temp"
+	write_padding "40" "000"
+}
+
+
+write_header() {
+	write_identifier
+	write_size
+	write_label
+	write_padding "512" "377"
+}
+
+
+# $1: argument count
+main() {
+	check_arguments "$1"
+
+	temp="$(mktemp -t mtkheaderXXXXXX)"
+	write_header
+
+	cat "$temp" "$input" > "$output"
+	rm "$temp"
+}
+
+
+main "$#"
