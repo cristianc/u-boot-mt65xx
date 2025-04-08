@@ -41,6 +41,7 @@
 *.ti-*
 # Build tree
 /build*
+/out*
 
 #
 # Top-level generic files
