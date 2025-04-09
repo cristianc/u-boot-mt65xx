@@ -41,13 +41,11 @@ will be required. The following is an incomplete list:
 * dfu-util
 * dtc
 * openssl
-* sudo OR guestmount
 * e2fsprogs
 * util-linux
 * coreutils
 * dosfstools
 * efitools
-* guestfs-tools
 * mount
 * mtools
 * sbsigntool
@@ -64,23 +62,12 @@ The test script supports either:
   physical board, attach to the board's console stream, and reset the board.
   Further details are described later.
 
-The usage of command 'sudo' should be avoided in tests. To create disk images
-use command virt-make-fs which is provided by package guestfs-tools. This
-command creates a virtual machine with QEMU in which the disk image is
-generated.
-
-Command virt-make-fs needs read access to the current kernel. On Ubuntu only
-root has this privilege. You can add a script /etc/initramfs-tools/hooks/vmlinuz
-with the following content to overcome the problem:
-
-.. code-block:: bash
-
-    #!/bin/sh
-    echo "chmod a+r vmlinuz-*"
-    chmod a+r /boot/vmlinuz-*
-
-The script should be chmod 755. It will be invoked whenever the initial RAM file
-system is updated.
+The usage of the command 'sudo' is not allowed in tests. Using elevated
+priviledges can lead to security concerns. Furthermore not all users may have
+administrator rights. Therefore the command 'sudo' must not be used in tests.
+To create disk images we have helper functions located in
+`test/py/tests/fs_helper.py` which shall be used in any tests that require
+creating disk images.
 
 Using `virtualenv` to provide requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -125,7 +112,7 @@ browser, but may be read directly as plain text, perhaps with the aid of the
 If sandbox crashes (e.g. with a segfault) you will see message like this::
 
 
-    test/py/u_boot_spawn.py:171: in expect
+    test/py/spawn.py:171: in expect
         c = os.read(self.fd, 1024).decode(errors='replace')
     E   ValueError: U-Boot exited with signal 11 (Signals.SIGSEGV)
 
@@ -506,24 +493,24 @@ Writing tests
 Please refer to the pytest documentation for details of writing pytest tests.
 Details specific to the U-Boot test suite are described below.
 
-A test fixture named `u_boot_console` should be used by each test function. This
+A test fixture named `ubman` should be used by each test function. This
 provides the means to interact with the U-Boot console, and retrieve board and
 environment configuration information.
 
-The function `u_boot_console.run_command()` executes a shell command on the
+The function `ubman.run_command()` executes a shell command on the
 U-Boot console, and returns all output from that command. This allows
 validation or interpretation of the command output. This function validates
 that certain strings are not seen on the U-Boot console. These include shell
 error messages and the U-Boot sign-on message (in order to detect unexpected
-board resets). See the source of `u_boot_console_base.py` for a complete list of
+board resets). See the source of `console_base.py` for a complete list of
 "bad" strings. Some test scenarios are expected to trigger these strings. Use
-`u_boot_console.disable_check()` to temporarily disable checking for specific
+`ubman.disable_check()` to temporarily disable checking for specific
 strings. See `test_unknown_cmd.py` for an example.
 
 Board- and board-environment configuration values may be accessed as sub-fields
-of the `u_boot_console.config` object, for example
-`u_boot_console.config.ram_base`.
+of the `ubman.config` object, for example
+`ubman.config.ram_base`.
 
 Build configuration values (from `.config`) may be accessed via the dictionary
-`u_boot_console.config.buildconfig`, with keys equal to the Kconfig variable
+`ubman.config.buildconfig`, with keys equal to the Kconfig variable
 names.
