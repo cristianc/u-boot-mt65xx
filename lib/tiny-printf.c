@@ -283,8 +283,9 @@ static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
 					break;
 				}
 				islong = true;
-				/* no break */
+				fallthrough;
 			case 'x':
+			case 'X':
 				if (islong) {
 					num = va_arg(va, unsigned long);
 					div = 1UL << (sizeof(long) * 8 - 4);
