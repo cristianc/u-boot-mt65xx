@@ -7,7 +7,7 @@
 **N** = does't work;\
 **N/A** = untested / unknown.
 
-* Booting = **N**;
+* Booting = **N/A**;
 * UART = **N/A**;
 * Display (via simple-framebuffer) - **N/A**;
 
