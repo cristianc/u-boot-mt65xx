@@ -402,7 +402,7 @@ static int do_bootm_elf(int flag, struct bootm_info *bmi)
 	if (flag != BOOTM_STATE_OS_GO)
 		return 0;
 
-	bootelf(bmi->images->ep, flags, 0, NULL);
+	bootelf(bmi->images->ep, flags, bmi->argc, bmi->argv);
 
 	return 1;
 }
@@ -507,7 +507,9 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
 
 	ret = efi_binary_run(image_buf, images->os.image_len,
 			     images->ft_len
-			     ? images->ft_addr : EFI_FDT_USE_INTERNAL);
+			     ? images->ft_addr : EFI_FDT_USE_INTERNAL,
+				 (void *)images->initrd_start,
+				 (size_t)(images->initrd_end - images->initrd_start));
 
 	return ret;
 }
