@@ -17,9 +17,9 @@
 make mt6572_defconfig
 ```
 
-2. Run the `build_mt6572.sh` script:
+2. Run the `build.sh` script:
 ```
-./build_mt6572.sh
+./build.sh
 ```
 
 3. Profit
