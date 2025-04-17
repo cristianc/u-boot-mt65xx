@@ -14,7 +14,7 @@
 ## Building
 1. `make` the defconfig:
 ```
-make mt6572_defconfig
+make O=out mt6572_defconfig
 ```
 
 2. Run the `build.sh` script:
