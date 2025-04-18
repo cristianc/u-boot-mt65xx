@@ -177,4 +177,5 @@ CONFIG_SYS_ARM_MMU=y
 
 ### Disabling unused stuff
 CONFIG_NET=n
+CONFIG_CMD_NET=n
 CONFIG_EFI_LOADER=n
