@@ -18,6 +18,7 @@ struct boot_argument *preloader_param;
 
 int mtk_soc_early_init(void)
 {
+	printf("mtk_soc_early_init\n");
 	return 0;
 }
 
@@ -35,10 +36,9 @@ int dram_init(void)
 		for (i = 0; i < preloader_param->dram_rank_num; i++)
 			gd->ram_size += preloader_param->dram_rank_size[i];
 	} else {
-		gd->ram_size = get_ram_size((long *)CFG_SYS_SDRAM_BASE,
-					    SZ_2G);
+		//gd->ram_size = get_ram_size((long *)CFG_SYS_SDRAM_BASE, SZ_2G);
+		gd->ram_size = get_ram_size((long *)CFG_SYS_SDRAM_BASE, SZ_512M);
 	}
-
 	return 0;
 }
 
@@ -49,7 +49,7 @@ int print_cpuinfo(void)
 
 	chipid = ioremap(VER_BASE, VER_SIZE);
 	swver = readl(chipid + APSW_VER);
-
+	
 	printf("CPU:   MediaTek MT6572 E%d\n", (swver & 0xf) + 1);
 
 	return 0;
