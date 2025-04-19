@@ -15,6 +15,6 @@ int dram_init(void)
 
 int print_cpuinfo(void)
 {
-	printf("CPU:   MediaTek MT6572\n");
+	printf("SoC:   MediaTek MT6572\n");
 	return 0;
 }
