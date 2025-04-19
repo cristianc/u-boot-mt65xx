@@ -1,0 +1,66 @@
+/dts-v1/;
+#include "mt6572.dtsi"
+#include "skeleton.dtsi"
+
+/ {
+  model = "Lenovo A369i";
+	compatible = "lenovo,a369i", "mediatek,mt6572";
+
+	chosen {
+		tick-timer = &gpt;
+		stdout-path = &fb0;
+	};
+
+	memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		device_type = "memory";
+		reg = <0x80000000 0x20000000>;
+	};
+
+	// use framebuffer set up by stock lk 
+	fb0: framebuffer@9fa00000 {
+		compatible = "simple-framebuffer";
+		reg = <0x9fa00000 (480 * 800 * 2)>;
+		width = <480>;
+		height = <800>;
+		stride = <(480 * 2)>;
+		format = "r5g6b5";
+		status = "okay";
+	};
+	
+	reg_1p8v: regulator-1p8v {
+		compatible = "regulator-fixed";
+		regulator-name = "fixed-1.8V";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		regulator-boot-on;
+		regulator-always-on;
+	};
+
+	reg_3p3v: regulator-3p3v {
+		compatible = "regulator-fixed";
+		regulator-name = "fixed-3.3V";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-boot-on;
+		regulator-always-on;
+	};
+
+	reg_5v: regulator-5v {
+		compatible = "regulator-fixed";
+		regulator-name = "fixed-5V";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		regulator-boot-on;
+		regulator-always-on;
+	};
+};
+
+&uart0 {
+	status = "okay";
+};
+
+&uart1 {
+	status = "okay";
+};
