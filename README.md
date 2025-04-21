@@ -46,4 +46,5 @@ mtk w bootimg u-boot-mt6572.img
 ```
 mtk w lk out/u-boot-mtk.bin
 ```
+3. Connect to the PC with a USB cable
 4. Profit
