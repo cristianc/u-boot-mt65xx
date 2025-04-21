@@ -7,7 +7,7 @@
 #include <asm/io.h>
 #include <linux/delay.h>
 
-#define PWRAP_BASE		0x1000d000
+#define PWRAP_BASE    0x1000f000
 #define PWRAP_WACS2_CMD		0x9c
 
 #define PWRAP_CALC(adr, wdata) ((1 << 31) | (((adr) >> 1) << 16) | (wdata))
@@ -28,10 +28,13 @@ int do_poweroff(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 	mdelay(10);
 
 	val = PWRAP_CALC(MT6323_PWRC_BASE + RTC_WRTGR, 1);
+	printf("mt6323: %s: powering off...\n", __func__);
+	// wait some time and then poweroff
+	mdelay(2000);
 	writel(val, addr);
 
 	// wait some time and then print error
-	mdelay(10000);
-	printf("Failed to power off!!!\n");
+	mdelay(1000);
+	printf("mt6323: %s: failed to power off\n", __func__);
 	return 1;
 }
