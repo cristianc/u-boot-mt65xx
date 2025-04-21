@@ -1,15 +1,21 @@
-# "Das U-Boot" for MediaTek MT6572
-**In 2nd bootloader mode, packed to Android boot.img*
+# "Das U-Boot" for MediaTek MT6572/MT6580
+MT6572: In 2nd bootloader mode (replaces the kernel);\
+MT6580: In 1st bootloader mode (replaces the `lk`).
 
 ## Status
 **Y** = works;\
 **P** = partially works;\
 **N** = does't work;\
 **N/A** = untested / unknown.
-
+### MT6572
 * Booting = **Y**;
 * UART = **Y**;
 * Display (via simple-framebuffer) - **Y**;
+
+### MT6580
+* Booting = **Y**;
+* UART = **Y**;
+* Display (via simple-framebuffer) - **N/A**;
 
 ## Building
 1. `make` the defconfig:
