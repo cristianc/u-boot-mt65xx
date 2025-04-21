@@ -9,6 +9,5 @@
 #define CFG_EXTRA_ENV_SETTINGS "stdin=serial,button-kbd\0" \
 	"stdout=vidconsole,serial\0" \
 	"stderr=vidconsole,serial\0" \
-	"bootdelay=-1"
 
 #endif /* ifdef __CONFIG_MT6572_H */
