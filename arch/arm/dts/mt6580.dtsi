@@ -84,23 +84,19 @@
     compatible = "simple-bus";
     ranges;
   
-    /*topckgen: clock-controller@10000000 {
+    topckgen: clock-controller@10000000 {
+      // TODO: write a proper clock driver and nuke this
       compatible = "mediatek,mt7623-topckgen";
       reg = <0x10000000 0x1000>;
       #clock-cells = <1>;
     };
 
-    infracfg: syscon@10001000 {
-      compatible = "mediatek,mt7623-infracfg", "syscon";
-      reg = <0x10001000 0x1000>;
-      #clock-cells = <1>;
-    };
-  
     pericfg: syscon@10003000 {
+      // TODO: write a proper clock driver and nuke this
       compatible = "mediatek,mt7623-pericfg", "syscon";
       reg = <0x10003000 0x1000>;
       #clock-cells = <1>;
-    };*/
+    };
   
     wdt: watchdog@10007000 {
       compatible = "mediatek,wdt";
@@ -122,11 +118,12 @@
       clock-names = "system-clk", "rtc32k";
     };
     
-    /*apmixedsys: clock-controller@10205000 {
+    apmixedsys: clock-controller@10018000 {
+      // TODO: write a proper clock driver and nuke this
       compatible = "mediatek,mt7623-apmixedsys";
-      reg = <0x10205000 0x1000>;
+      reg = <0x10018000 0x1000>;
       #clock-cells = <1>;
-    };*/
+    };
 
     gic: interrupt-controller@10210000 {
       compatible = "arm,cortex-a7-gic";
@@ -156,6 +153,16 @@
       interrupts = <GIC_SPI 45 IRQ_TYPE_LEVEL_LOW>;
       // TODO: write a proper clock driver and nuke this
       clocks = <&clk26m>;
+      status = "disabled";
+    };
+
+    mmc0: mmc@11120000 {
+      compatible = "mediatek,mt7623-mmc";
+      reg = <0x11120000 0x10000>;
+      interrupts = <GIC_SPI 38 IRQ_TYPE_LEVEL_LOW>;
+      clocks = <&pericfg CLK_PERI_MSDC30_0>,
+               <&topckgen CLK_TOP_MSDC30_0_SEL>;
+      clock-names = "source", "hclk";
       status = "disabled";
     };
   };

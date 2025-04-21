@@ -52,3 +52,13 @@
 /*&uart1 {
   status = "okay";
 };*/
+
+&mmc0 {
+  bus-width = <8>;
+  max-frequency = <50000000>;
+  cap-mmc-highspeed;
+  vmmc-supply = <&reg_3p3v>;
+  vqmmc-supply = <&reg_1p8v>;
+  non-removable;
+  status = "okay";
+};
