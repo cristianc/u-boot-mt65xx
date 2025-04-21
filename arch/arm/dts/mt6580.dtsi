@@ -9,7 +9,7 @@
 
 
 / {
-  compatible = "mediatek,mt6580", "mediatek,MT6580";
+  compatible = "mediatek,mt6580";
   #address-cells = <1>;
   #size-cells = <1>;
   interrupt-parent = <&gic>;
