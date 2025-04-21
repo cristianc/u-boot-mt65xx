@@ -17,6 +17,7 @@ MT6580: In 1st bootloader mode (replaces the `lk`).
 * Booting = **Y**;
 * UART = **Y**;
 * Display (via simple-framebuffer) - **N/A**;
+* Internal storage / eMMC - **P**;
 
 ## Building
 1. `make` the defconfig:
