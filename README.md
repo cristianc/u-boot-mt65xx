@@ -7,6 +7,7 @@ MT6580: In 1st bootloader mode (replaces the `lk`).
 **P** = partially works;\
 **N** = does't work;\
 **N/A** = untested / unknown.
+
 ### MT6572
 * Booting = **Y**;
 * UART = **Y**;
@@ -22,7 +23,6 @@ MT6580: In 1st bootloader mode (replaces the `lk`).
 ```
 make O=out mt6572_defconfig
 ```
-
 2. Run the `build.sh` script:
 ```
 ./build.sh
@@ -31,9 +31,19 @@ make O=out mt6572_defconfig
 3. Profit
 
 ## Flashing
-You can use either `fastboot` or `mtkclient`, this guide uses the latter.
-You need to power off the device, then enter: 
+### MT6572
+1. Power off the device
+2. Enter:
 ```
 mtk w bootimg u-boot-mt6572.img
-``` 
-and connect the device to your PC with a USB cable.
+```
+3. Connect to the PC with a USB cable
+4. Profit
+
+### MT6580
+1. Power off the device
+2. Enter:
+```
+mtk w lk out/u-boot-mtk.bin
+```
+4. Profit
