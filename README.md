@@ -27,15 +27,22 @@ MT6580: In 1st bootloader mode (replaces the `lk`).
 * USB - **N/A**;
 
 ## Building
+### MT6572
+1. Run the `build_mt6572.sh` build script:
+```
+./build_mt6572.sh
+```
+2. Profit
+
+### MT6580
 1. `make` the defconfig:
 ```
-make O=out mt6572_defconfig
+ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out mt6580_defconfig
 ```
-2. Run the `build.sh` script:
+2. Build `U-Boot` itself:
 ```
-./build.sh
+ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out -j$(nproc --all)
 ```
-
 3. Profit
 
 ## Flashing

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 rm_prev_file() {
   prev_file="u-boot-mt6572.img"
   if [ -f $prev_file ]; then
