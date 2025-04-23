@@ -32,7 +32,7 @@
 	clocks {
 		#address-cells = <1>;
 		#size-cells = <1>;
-    ranges;
+    	ranges;
 
 		system_clk: dummy13m {
 			compatible = "fixed-clock";
@@ -56,8 +56,8 @@
 	};
 	
 	wdt-reboot {
-			compatible = "wdt-reboot";
-			wdt = <&wdt>;
+		compatible = "wdt-reboot";
+		wdt = <&wdt>;
 	};
 
 	soc {
@@ -84,7 +84,7 @@
 			#clock-cells = <1>;
 		};
   
-  	wdt: watchdog@10007000 {
+  		wdt: watchdog@10007000 {
 			compatible = "mediatek,mt6589-wdt";
 			reg = <0x10007000 0x100>;
 			timeout-sec = <15>;
@@ -119,9 +119,9 @@
 			#interrupt-cells = <3>;
 			interrupt-parent = <&gic>;
 			reg = <0x10211000 0x1000>,
-		  	    <0x10212000 0x2000>,
-		   		  <0x10214000 0x2000>,
-		      	<0x10216000 0x2000>;
+			      <0x10212000 0x2000>,
+		   	      <0x10214000 0x2000>,
+		          <0x10216000 0x2000>;
 		};
 
 		uart0: serial@11005000 {
