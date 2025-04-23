@@ -8,7 +8,6 @@
 
 	chosen {
 		tick-timer = &gpt;
-		stdout-path = &fb0;
 	};
 
 	memory {
