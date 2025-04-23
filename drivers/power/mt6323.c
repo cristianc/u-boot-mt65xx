@@ -28,7 +28,7 @@ int do_poweroff(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 	mdelay(10);
 
 	val = PWRAP_CALC(MT6323_PWRC_BASE + RTC_WRTGR, 1);
-	printf("mt6323: %s: powering off...\n", __func__);
+	printf("mt6323: %s: powering off in 1.5s...\n", __func__);
 	// wait some time and then poweroff
 	mdelay(1500);
 	writel(val, addr);
