@@ -54,6 +54,11 @@
 			clock-output-names = "clk26m";
 		};
 	};
+	
+	wdt-reboot {
+			compatible = "wdt-reboot";
+			wdt = <&wdt>;
+	};
 
 	soc {
 		#address-cells = <1>;
@@ -85,12 +90,7 @@
 			timeout-sec = <15>;
 			interrupts = <GIC_SPI 126 IRQ_TYPE_LEVEL_LOW>;
 		};
-		
-		wdt-reboot {
-			compatible = "wdt-reboot";
-			wdt = <&wdt>;
-		};
-	
+			
 		gpt: timer@10008000 {
 			compatible = "mediatek,mt6577-timer";
 			reg = <0x10008000 0x80>;
