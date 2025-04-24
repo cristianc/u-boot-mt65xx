@@ -3,10 +3,7 @@
 #include <dt-bindings/phy/phy.h>
 #include <dt-bindings/gpio/gpio.h>
 
-#include <dt-bindings/clock/mt7623-clk.h>
-#include <dt-bindings/power/mt7623-power.h>
-#include <dt-bindings/reset/mt7623-reset.h>
-
+#include <dt-bindings/clock/mt6580-clk.h>
 
 / {
   compatible = "mediatek,mt6580";
@@ -43,32 +40,6 @@
     };
   };
 
-  clocks {
-    #address-cells = <1>;
-    #size-cells = <1>;
-    ranges;
-
-    system_clk: dummy13m {
-      compatible = "fixed-clock";
-      clock-frequency = <13000000>;
-      #clock-cells = <0>;
-    };
-
-    rtc32k: oscillator-0 {
-      compatible = "fixed-clock";
-      clock-frequency = <32000>;
-      #clock-cells = <0>;
-      clock-output-names = "rtc32k";
-    };
-
-    clk26m: oscillator-1 {
-      compatible = "fixed-clock";
-      #clock-cells = <0>;
-      clock-frequency = <26000000>;
-      clock-output-names = "clk26m";
-    };
-  };
-  
   wdt-reboot {
     compatible = "wdt-reboot";
     wdt = <&wdt>;
@@ -79,41 +50,37 @@
     #size-cells = <1>;
     compatible = "simple-bus";
     ranges;
-  
+
+    apmixedsys: clock-controller@10018000 {
+      compatible = "mediatek,mt6580-apmixedsys";
+      reg = <0x10018000 0x1000>;
+      #clock-cells = <1>;
+    };
+
     topckgen: clock-controller@10000000 {
-      // TODO: write a proper clock driver and nuke this
-      compatible = "mediatek,mt7623-topckgen";
+      compatible = "mediatek,mt6580-topckgen";
       reg = <0x10000000 0x1000>;
       #clock-cells = <1>;
     };
 
-    pericfg: syscon@10003000 {
-      // TODO: write a proper clock driver and nuke this
-      compatible = "mediatek,mt7623-pericfg", "syscon";
-      reg = <0x10003000 0x1000>;
+    topckgen_cg: clock-controller-cg@10000000 {
+      compatible = "mediatek,mt6580-topckgen-cg";
+      reg = <0x10000000 0x1000>;
       #clock-cells = <1>;
     };
-  
+
     wdt: watchdog@10007000 {
       compatible = "mediatek,wdt";
       reg = <0x10007000 0x100>;
       timeout-sec = <15>;
       interrupts = <GIC_SPI 157 IRQ_TYPE_LEVEL_LOW>;
     };
-    
+
     gpt: timer@10008000 {
       compatible = "mediatek,timer";
       reg = <0x10008000 0x80>;
       interrupts = <GIC_SPI 92 IRQ_TYPE_LEVEL_LOW>;
-      clocks = <&system_clk>, <&rtc32k>;
-      clock-names = "system-clk", "rtc32k";
-    };
-    
-    apmixedsys: clock-controller@10018000 {
-      // TODO: write a proper clock driver and nuke this
-      compatible = "mediatek,mt7623-apmixedsys";
-      reg = <0x10018000 0x1000>;
-      #clock-cells = <1>;
+      clocks = <&topckgen_cg CLK_TOP_APXGPT>;
     };
 
     gic: interrupt-controller@10210000 {
@@ -132,8 +99,9 @@
       reg = <0x11005000 0x400>;
       reg-shift = <2>;
       interrupts = <GIC_SPI 44 IRQ_TYPE_LEVEL_LOW>;
-      // TODO: write a proper clock driver and nuke this
-      clocks = <&clk26m>;
+      clocks =  <&topckgen CLK_TOP_UART0_SEL>,
+                <&topckgen_cg CLK_TOP_UART0>;
+      clock-names = "baud", "bus";
       status = "disabled";
     };
 
@@ -142,8 +110,9 @@
       reg = <0x11006000 0x400>;
       reg-shift = <2>;
       interrupts = <GIC_SPI 45 IRQ_TYPE_LEVEL_LOW>;
-      // TODO: write a proper clock driver and nuke this
-      clocks = <&clk26m>;
+      clocks =  <&topckgen CLK_TOP_UART1_SEL>,
+                <&topckgen_cg CLK_TOP_UART1>;
+      clock-names = "baud", "bus";
       status = "disabled";
     };
 
@@ -151,8 +120,8 @@
       compatible = "mediatek,mt7623-mmc";
       reg = <0x11120000 0x10000>;
       interrupts = <GIC_SPI 38 IRQ_TYPE_LEVEL_LOW>;
-      clocks = <&pericfg CLK_PERI_MSDC30_0>,
-               <&topckgen CLK_TOP_MSDC30_0_SEL>;
+      clocks = <&topckgen_cg CLK_TOP_MSDC0>,
+               <&topckgen CLK_TOP_MSDC0_SEL>;
       clock-names = "source", "hclk";
       status = "disabled";
     };
