@@ -88,6 +88,12 @@ config LED_PWM
 	  Enable support for LEDs connected to PWM.
 	  Linux compatible ofdata.
 
+config LED_MTK_PWM
+	bool "LED MTK_PWM"
+	depends on LED
+	help
+	  Enable support for Mediatek Display PWM.
+
 config LED_BLINK
 	bool "Support hardware LED blinking"
 	depends on LED
