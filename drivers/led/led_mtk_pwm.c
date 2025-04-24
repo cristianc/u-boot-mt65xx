@@ -97,7 +97,7 @@ static const struct led_ops led_mtk_pwm_ops = {
 };
 
 static const struct udevice_id led_mtk_pwm_ids[] = {
-	{ .compatible = "mediatek,display_pwm" },
+	{ .compatible = "mediatek,display-pwm" },
 	{ }
 };
 

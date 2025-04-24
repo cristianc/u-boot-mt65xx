@@ -133,7 +133,7 @@
     };
 
     display_pwm: led@1100f000 {
-      compatible = "mediatek,display_pwm";
+      compatible = "mediatek,display-pwm";
       reg = <0x1100f000 0x1000>;
       clocks =  <&topckgen_cg CLK_TOP_MMSYS_PWM>,
                 <&mmsys_cg CLK_MMSYS_PWM_MM>,
