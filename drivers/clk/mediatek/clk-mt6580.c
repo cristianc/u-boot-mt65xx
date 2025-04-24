@@ -58,6 +58,7 @@ static const struct mtk_fixed_factor top_fixed_divs[] = {
 	FACTOR0(CLK_TOP_UPLL, CLK_APMIXED_UNIVPLL, 1, 1),
 	FACTOR1(CLK_TOP_UPLL_D6, CLK_TOP_UPLL, 1, 6),
 	FACTOR1(CLK_TOP_UPLL_D7, CLK_TOP_UPLL, 1, 7),
+	FACTOR1(CLK_TOP_UPLL_D12, CLK_TOP_UPLL, 1, 12),
 	FACTOR1(CLK_TOP_UPLL_D24, CLK_TOP_UPLL, 1, 24),
 };
 
@@ -77,12 +78,24 @@ static const int msdc_parents[] = {
 	CLK_TOP_UPLL_D6,
 };
 
+static const int mmsys_pwm_parents[] = {
+	CLK_XTAL,
+	CLK_TOP_UPLL_D12,
+};
+
 static const struct mtk_composite top_muxes[] = {
 	MUX(CLK_TOP_UART0_SEL, uart_parents, 0x0, 0, 1),
 	MUX(CLK_TOP_MSDC0_SEL, msdc_parents, 0x0, 11, 3),
+	MUX(CLK_TOP_MMSYS_PWM_SEL, mmsys_pwm_parents, 0x0, 18, 1),
 	MUX(CLK_TOP_UART1_SEL, uart_parents, 0x0, 19, 1),
 	MUX(CLK_TOP_MSDC1_SEL, msdc_parents, 0x0, 20, 3),
 	// TODO: add more muxes
+};
+
+static const struct mtk_gate_regs top0_cg_regs = {
+	.sta_ofs = 0x20,
+	.set_ofs = 0x50,
+	.clr_ofs = 0x80,
 };
 
 static const struct mtk_gate_regs top1_cg_regs = {
@@ -91,13 +104,20 @@ static const struct mtk_gate_regs top1_cg_regs = {
 	.clr_ofs = 0x84,
 };
 
-#define GATE_TOP1_FLAGS(_id, _parent, _shift, _flags) {		\
+#define GATE_TOPx_FLAGS(_id, _parent, _shift, _flags, _regs) {		\
 		.id = _id,					\
 		.parent = _parent,				\
-		.regs = &top1_cg_regs,				\
+		.regs = _regs,				\
 		.shift = _shift,				\
 		.flags = _flags,				\
 	}
+
+#define GATE_TOP0(_id, _parent, _shift) \
+	GATE_TOPx_FLAGS(_id, _parent, _shift, CLK_GATE_SETCLR | CLK_PARENT_TOPCKGEN, \
+			&top0_cg_regs)
+
+#define GATE_TOP1_FLAGS(_id, _parent, _shift, _flags) \
+	GATE_TOPx_FLAGS(_id, _parent, _shift, _flags, &top1_cg_regs)
 
 #define GATE_TOP1(_id, _parent, _shift) \
 	GATE_TOP1_FLAGS(_id, _parent, _shift, CLK_GATE_SETCLR | CLK_PARENT_TOPCKGEN)
@@ -106,6 +126,8 @@ static const struct mtk_gate_regs top1_cg_regs = {
 	GATE_TOP1_FLAGS(_id, _parent, _shift, CLK_GATE_SETCLR | CLK_PARENT_XTAL)
 
 static const struct mtk_gate top_cgs[] = {
+	GATE_TOP0(CLK_TOP_MMSYS_PWM, CLK_TOP_MMSYS_PWM_SEL, 0),
+	
 	GATE_TOP1_XTAL(CLK_TOP_I2C0, CLK_PARENT_XTAL, 3),
 	GATE_TOP1_XTAL(CLK_TOP_I2C1, CLK_PARENT_XTAL, 4),
 	GATE_TOP1(CLK_TOP_UART0, CLK_TOP_UART0_SEL, 10),
@@ -115,6 +137,28 @@ static const struct mtk_gate top_cgs[] = {
 	GATE_TOP1(CLK_TOP_MSDC1, CLK_TOP_MSDC1_SEL, 18),
 	GATE_TOP1_XTAL(CLK_TOP_APXGPT, CLK_PARENT_XTAL, 24),
 	// TODO: add more gates
+};
+
+static const struct mtk_gate_regs mmsys1_cg_regs = {
+	.sta_ofs = 0x110,
+	.set_ofs = 0x114,
+	.clr_ofs = 0x118,
+};
+
+#define GATE_MMSYS1_FLAGS(_id, _parent, _shift, _flags) {		\
+		.id = _id,					\
+		.parent = _parent,				\
+		.regs = &mmsys1_cg_regs,				\
+		.shift = _shift,				\
+		.flags = _flags,				\
+	}
+
+#define GATE_MMSYS1_XTAL(_id, _parent, _shift) \
+	GATE_MMSYS1_FLAGS(_id, _parent, _shift, CLK_GATE_SETCLR | CLK_PARENT_XTAL)
+
+static const struct mtk_gate mmsys_cgs[] = {
+	GATE_MMSYS1_XTAL(CLK_MMSYS_PWM_MM, CLK_XTAL, 0),
+	GATE_MMSYS1_XTAL(CLK_MMSYS_PWM_26M, CLK_XTAL, 1),
 };
 
 static const struct mtk_clk_tree mt6580_clk_tree = {
@@ -142,6 +186,11 @@ static int mt6580_topckgen_cg_probe(struct udevice *dev)
 	return mtk_common_clk_gate_init(dev, &mt6580_clk_tree, top_cgs);
 }
 
+static int mt6580_mmsys_cg_probe(struct udevice *dev)
+{
+	return mtk_common_clk_gate_init(dev, &mt6580_clk_tree, mmsys_cgs);
+}
+
 static const struct udevice_id mt6580_apmixed_compat[] = {
 	{ .compatible = "mediatek,mt6580-apmixedsys" },
 	{ }
@@ -154,6 +203,11 @@ static const struct udevice_id mt6580_topckgen_compat[] = {
 
 static const struct udevice_id mt6580_topckgen_cg_compat[] = {
 	{ .compatible = "mediatek,mt6580-topckgen-cg" },
+	{ }
+};
+
+static const struct udevice_id mt6580_mmsys_cg_compat[] = {
+	{ .compatible = "mediatek,mt6580-mmsys-cg" },
 	{ }
 };
 
@@ -182,6 +236,16 @@ U_BOOT_DRIVER(mtk_clk_topckgen_cg) = {
 	.id = UCLASS_CLK,
 	.of_match = mt6580_topckgen_cg_compat,
 	.probe = mt6580_topckgen_cg_probe,
+	.priv_auto	= sizeof(struct mtk_cg_priv),
+	.ops = &mtk_clk_gate_ops,
+	.flags = DM_FLAG_PRE_RELOC,
+};
+
+U_BOOT_DRIVER(mtk_clk_mmsys_cg) = {
+	.name = "mt6580-mmsys-cg",
+	.id = UCLASS_CLK,
+	.of_match = mt6580_mmsys_cg_compat,
+	.probe = mt6580_mmsys_cg_probe,
 	.priv_auto	= sizeof(struct mtk_cg_priv),
 	.ops = &mtk_clk_gate_ops,
 	.flags = DM_FLAG_PRE_RELOC,
