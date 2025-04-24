@@ -1,0 +1,40 @@
+#ifndef _DT_BINDINGS_CLK_MT6580_H
+#define _DT_BINDINGS_CLK_MT6580_H
+
+/* Clocks */
+#define CLK_APMIXED_ARMPLL 0
+#define CLK_APMIXED_MAINPLL 1
+#define CLK_APMIXED_UNIVPLL 2
+#define CLK_APMIXED_MCUPLL 3
+#define CLK_APMIXED_WHPLL 4
+#define CLK_APMIXED_WPLL 5
+
+#define CLK_TOP_MPLL 6
+#define CLK_TOP_MPLL_D6 7
+#define CLK_TOP_MPLL_D7 8
+#define CLK_TOP_MPLL_D8 9
+#define CLK_TOP_MPLL_D10 10
+#define CLK_TOP_MPLL_D12 11
+
+#define CLK_TOP_UPLL 12
+#define CLK_TOP_UPLL_D6 13
+#define CLK_TOP_UPLL_D7 14
+#define CLK_TOP_UPLL_D24 15
+
+/* Muxes */
+#define CLK_TOP_UART0_SEL 16
+#define CLK_TOP_MSDC0_SEL 17
+#define CLK_TOP_UART1_SEL 18
+#define CLK_TOP_MSDC1_SEL 19
+
+/* Gates */
+#define CLK_TOP_I2C0 0
+#define CLK_TOP_I2C1 1
+#define CLK_TOP_UART0 2
+#define CLK_TOP_UART1 3
+#define CLK_TOP_I2C2 4
+#define CLK_TOP_MSDC0 5
+#define CLK_TOP_MSDC1 6
+#define CLK_TOP_APXGPT 7
+
+#endif /* _DT_BINDINGS_CLK_MT6580_H */
