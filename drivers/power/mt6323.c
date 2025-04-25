@@ -24,16 +24,12 @@ int do_poweroff(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 	addr = PWRAP_BASE + PWRAP_WACS2_CMD;
 	val = PWRAP_CALC(MT6323_PWRC_BASE + RTC_BBPU, RTC_BBPU_KEY);
 	writel(val, addr);
-
 	mdelay(10);
 
 	val = PWRAP_CALC(MT6323_PWRC_BASE + RTC_WRTGR, 1);
-	printf("mt6323: %s: powering off in 1.5s...\n", __func__);
-	// wait some time and then poweroff
-	mdelay(1500);
+	printf("mt6323: %s: powering off...\n", __func__);
 	writel(val, addr);
 
-	// wait some time and then print error
 	mdelay(1000);
 	printf("mt6323: %s: failed to power off\n", __func__);
 	return 1;
