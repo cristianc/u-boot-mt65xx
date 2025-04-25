@@ -142,6 +142,7 @@
       linux,default_trigger = "backlight";
       period = <1023>;
       level = <1023>;
+      default-state = "on";
     };
   };
 };
