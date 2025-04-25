@@ -9,13 +9,12 @@
 
 #define PWRAP_BASE    		0x1000f000
 #define PWRAP_WACS2_CMD		0x9c
+#define MT6323_PWRC_BASE	0x8000
+#define RTC_BBPU					0x0000
+#define RTC_BBPU_KEY		  (0x43 << 8)
+#define RTC_WRTGR		       0x003c
 
 #define PWRAP_CALC(adr, wdata) ((1 << 31) | (((adr) >> 1) << 16) | (wdata))
-
-#define MT6323_PWRC_BASE	0x8000
-#define RTC_BBPU		0x0000
-#define RTC_BBPU_KEY		(0x43 << 8)
-#define RTC_WRTGR		0x003c
 
 int do_poweroff(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 {
