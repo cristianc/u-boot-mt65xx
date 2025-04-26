@@ -30,15 +30,15 @@
 #define CLK_TOP_MMSYS_PWM_SEL 21
 
 /* Gates */
-#define CLK_TOP_I2C0 0
-#define CLK_TOP_I2C1 1
-#define CLK_TOP_UART0 2
-#define CLK_TOP_UART1 3
-#define CLK_TOP_I2C2 4
-#define CLK_TOP_MSDC0 5
-#define CLK_TOP_MSDC1 6
-#define CLK_TOP_APXGPT 7
-#define CLK_TOP_MMSYS_PWM 8
+#define CLK_TOP_MMSYS_PWM 0
+#define CLK_TOP_I2C0 1
+#define CLK_TOP_I2C1 2
+#define CLK_TOP_UART0 3
+#define CLK_TOP_UART1 4
+#define CLK_TOP_I2C2 5
+#define CLK_TOP_MSDC0 6
+#define CLK_TOP_MSDC1 7
+#define CLK_TOP_APXGPT 8
 
 #define CLK_MMSYS_PWM_MM 0
 #define CLK_MMSYS_PWM_26M 1

@@ -86,9 +86,9 @@ static const int mmsys_pwm_parents[] = {
 static const struct mtk_composite top_muxes[] = {
 	MUX(CLK_TOP_UART0_SEL, uart_parents, 0x0, 0, 1),
 	MUX(CLK_TOP_MSDC0_SEL, msdc_parents, 0x0, 11, 3),
-	MUX(CLK_TOP_MMSYS_PWM_SEL, mmsys_pwm_parents, 0x0, 18, 1),
 	MUX(CLK_TOP_UART1_SEL, uart_parents, 0x0, 19, 1),
 	MUX(CLK_TOP_MSDC1_SEL, msdc_parents, 0x0, 20, 3),
+	MUX(CLK_TOP_MMSYS_PWM_SEL, mmsys_pwm_parents, 0x0, 18, 1),
 	// TODO: add more muxes
 };
 
@@ -127,7 +127,7 @@ static const struct mtk_gate_regs top1_cg_regs = {
 
 static const struct mtk_gate top_cgs[] = {
 	GATE_TOP0(CLK_TOP_MMSYS_PWM, CLK_TOP_MMSYS_PWM_SEL, 0),
-	
+
 	GATE_TOP1_XTAL(CLK_TOP_I2C0, CLK_XTAL, 3),
 	GATE_TOP1_XTAL(CLK_TOP_I2C1, CLK_XTAL, 4),
 	GATE_TOP1(CLK_TOP_UART0, CLK_TOP_UART0_SEL, 10),
