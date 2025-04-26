@@ -125,7 +125,10 @@ int board_fit_config_name_match(const char *name)
 	if (strncmp(name, "starfive/", 9))
 		return -EINVAL;
 	name += 9;
-	if (!strncmp(product_id, "VF7110", 6)) {
+	if (!strncmp(product_id, "FML13V01", 8) &&
+	    !strcmp(name, "jh7110-deepcomputing-fml13v01")) {
+		return 0;
+	} else if (!strncmp(product_id, "VF7110", 6)) {
 		version = get_pcb_revision_from_eeprom();
 		if ((version == 'b' || version == 'B') &&
 		    !strcmp(name, "jh7110-starfive-visionfive-2-v1.3b"))
@@ -137,9 +140,26 @@ int board_fit_config_name_match(const char *name)
 	} else if (!strncmp(product_id, "MARS", 4) &&
 		   !strcmp(name, "jh7110-milkv-mars")) {
 		return 0;
-	} else if (!strncmp(product_id, "STAR64", 6) &&
-		   !strcmp(name, "jh7110-pine64-star64")) {
+	} else if (!strcmp(name, "starfive/jh7110-milkv-mars") &&
+		   !strncmp(get_product_id_from_eeprom(), "MARS", 4)) {
 		return 0;
+	} else if ((!strcmp(name, "starfive/jh7110-pine64-star64")) &&
+		    !strncmp(get_product_id_from_eeprom(), "STAR64", 6)) {
+		return 0;
+	} else if ((!strcmp(name, "starfive/jh7110-starfive-visionfive-2-v1.2a")) &&
+		    !strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
+		switch (get_pcb_revision_from_eeprom()) {
+		case 'a':
+		case 'A':
+			return 0;
+		}
+	} else if ((!strcmp(name, "starfive/jh7110-starfive-visionfive-2-v1.2b")) &&
+		    !strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
+		switch (get_pcb_revision_from_eeprom()) {
+		case 'b':
+		case 'B':
+			return 0;
+		}
 	}
 
 	return -EINVAL;
