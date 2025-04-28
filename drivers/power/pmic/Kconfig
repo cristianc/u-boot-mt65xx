@@ -449,6 +449,14 @@ config SPL_POWER_TPS65910
 	bool "Enable legacy driver for TPS65910 PMIC in SPL"
 	depends on SPL
 
+config MTK_PWRAP
+	bool "Enable support for Mediatek PMIC Wrap"
+
+config MTK_PMIC
+	bool "Enable support for Mediatek PMIC"
+	depends on MTK_PWRAP
+	#select SYSRESET_CMD_POWEROFF if CMD_POWEROFF && !ARM_PSCI_FW
+
 if POWER_LEGACY || SPL_POWER_LEGACY
 
 config POWER_HI6553
