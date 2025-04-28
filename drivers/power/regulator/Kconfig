@@ -494,6 +494,12 @@ config REGULATOR_RZG2L_USBPHY
 	  the USB PHY peripheral of the Renesas RZ/G2L SoC. This option
 	  is required in order to use the USB OTG port.
 
+config REGULATOR_MTK
+	bool "Enable driver for Mediatek regulators"
+	depends on DM_REGULATOR && MTK_PMIC
+	---help---
+	Enable support for the regulator functions of the MTK PMIC.
+
 config DM_REGULATOR_CPCAP
 	bool "Enable driver for CPCAP PMIC regulators"
 	depends on DM_REGULATOR && DM_PMIC_CPCAP
