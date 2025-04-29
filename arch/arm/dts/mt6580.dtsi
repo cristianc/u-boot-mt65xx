@@ -69,6 +69,11 @@
       #clock-cells = <1>;
     };
 
+    pwrap: pwrap {
+      compatible = "mediatek,mt6580-pwrap";
+      reg = <0x1000f000 0x1000>;
+    };
+
     wdt: watchdog@10007000 {
       compatible = "mediatek,wdt";
       reg = <0x10007000 0x100>;
@@ -92,6 +97,21 @@
             <0x10212000 0x2000>,
             <0x10214000 0x2000>,
             <0x10216000 0x2000>;
+    };
+
+    pinctrl: pinctrl@10005000 {
+      compatible = "mediatek,mt6580-pinctrl";
+      reg = <0x10005000 0x1000>,
+            <0x10014000 0x1000>,
+            <0x10015000 0x1000>,
+            <0x10016000 0x1000>,
+            <0x10017000 0x1000>;
+      reg-names = "gpio", "iocfg_t",
+                  "iocfg_b", "iocfg_l", "iocfg_r";
+      gpio: gpio-controller {
+        gpio-controller;
+        #gpio-cells = <2>;
+      };
     };
 
     uart0: serial@11005000 {
@@ -122,6 +142,16 @@
       interrupts = <GIC_SPI 38 IRQ_TYPE_LEVEL_LOW>;
       clocks = <&topckgen_cg CLK_TOP_MSDC0>,
                <&topckgen CLK_TOP_MSDC0_SEL>;
+      clock-names = "source", "hclk";
+      status = "disabled";
+    };
+
+    mmc1: mmc@11130000 {
+      compatible = "mediatek,mt7623-mmc";
+      reg = <0x11130000 0x10000>;
+      interrupts = <GIC_SPI 39 IRQ_TYPE_LEVEL_LOW>;
+      clocks = <&topckgen_cg CLK_TOP_MSDC1>,
+               <&topckgen CLK_TOP_MSDC1_SEL>;
       clock-names = "source", "hclk";
       status = "disabled";
     };
