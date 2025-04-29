@@ -23,12 +23,12 @@ static int mtk_regulator_probe(struct udevice *dev)
   pmic_pdata = (void*)dev_get_driver_data(pmic);
   priv->pwrap = dev_get_parent(pmic);
 
-  for(int i = 0; 1; i++){
+  for (int i = 0; 1; i++) {
     // end of list
-    if(pmic_pdata->regulators[i].name == NULL)
+    if (pmic_pdata->regulators[i].name == NULL)
       return -EINVAL;
 
-    if(!strcmp(pmic_pdata->regulators[i].name, uc_pdata->name)){
+    if (!strcmp(pmic_pdata->regulators[i].name, uc_pdata->name)) {
       priv->regulator = pmic_pdata->regulators[i];
       break;
     }
@@ -45,7 +45,7 @@ static int mtk_regulator_get_enable(struct udevice *dev)
 
   int ret = pmic_reg_read(priv->pwrap, en_reg.reg);
 
-  if(ret < 0)
+  if (ret < 0)
     return ret;
 
   return ((ret >> en_reg.shift) & en_reg.mask) == en_reg.mask;
@@ -86,9 +86,8 @@ int mtk_regulator_set_value(struct udevice *dev, int uV)
   struct mtk_pmic_regulator regulator = priv->regulator;
   struct mtk_pmic_reg vosel_reg = regulator.vosel;
 
-  for(int i = 0; i < regulator.voltages_count; i++)
-  {
-    if(regulator.voltages[i] == uV){
+  for (int i = 0; i < regulator.voltages_count; i++) {
+    if (regulator.voltages[i] == uV) {
       return pmic_clrsetbits(priv->pwrap, vosel_reg.reg,
         vosel_reg.mask << vosel_reg.shift,
         i << vosel_reg.shift);
