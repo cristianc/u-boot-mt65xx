@@ -653,7 +653,7 @@ static const struct mtk_pinctrl_soc mt6580_data = {
 static int mtk_pinctrl_mt6580_probe(struct udevice *dev)
 {
   int err = mtk_pinctrl_common_probe(dev, &mt6580_data);
-  if(err)
+  if (err)
     return err;
 
   // WORKAROUND: set msdc1 pins mode to "msdc mode"
