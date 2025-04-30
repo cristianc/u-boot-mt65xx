@@ -61,6 +61,8 @@ static struct mtk_pmic_pdata mt6350_data = {
 };
 
 static const struct udevice_id mtk_pmic_match[] = {
+	/* vmc and vmch voltages are same as mt6350 */
+	{ .compatible = "mediatek,mt6323", .data = (ulong)&mt6350_data },
 	{ .compatible = "mediatek,mt6350", .data = (ulong)&mt6350_data },
 	{ }
 };
