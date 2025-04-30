@@ -15,13 +15,13 @@ static int mtk_pwrap_wacs2_wait_for_fsm(struct udevice *dev, u32 fsm)
 	u32 counter = 0;
 	u32 wacs2_fsm;
 
-	while(counter <= 100){
+	while (counter <= 100) {
 		wacs2_fsm = (readl(priv->base + MTK_PWRAP_REG_WACS2_RDATA) >> 16) & 0x7;
 
-		if(wacs2_fsm == fsm)
+		if (wacs2_fsm == fsm)
 			return 0;
 
-		if(wacs2_fsm == PWRAP_FSM_WAIT_FOR_VALID_CLR)
+		if (wacs2_fsm == PWRAP_FSM_WAIT_FOR_VALID_CLR)
 			writel(1, priv->base + MTK_PWRAP_REG_WACS2_VLDCLR);
 
 		mdelay(100);
@@ -40,7 +40,7 @@ static int mtk_pwrap_wacs2(struct udevice *dev, u8 write, u16 addr, u16 wdata)
 		return -EINVAL;
 
 	ret = mtk_pwrap_wacs2_wait_for_fsm(dev, PWRAP_FSM_WAIT_FOR_IDLE);
-	if(ret)
+	if (ret)
 		return ret;
 
 	u32 wacs_cmd = (write << 31) | ((addr >> 1) << 16) | wdata;
@@ -104,10 +104,10 @@ static int mtk_pwrap_probe(struct udevice *dev)
 	pmic_priv->trans_len = 2;
 
 	priv->base = dev_read_addr_ptr(dev);
-	if(!priv->base)
+	if (!priv->base)
 		return -EINVAL;
 
-	if((readl(priv->base + MTK_PWRAP_REG_INIT_DONE2) & 1) == 0)
+	if ((readl(priv->base + MTK_PWRAP_REG_INIT_DONE2) & 1) == 0)
 		return -EINVAL;
 
 	return 0;
