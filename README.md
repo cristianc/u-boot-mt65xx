@@ -19,7 +19,7 @@ MT6580: In 1st bootloader mode (replaces the `lk`).
 ### MT6580
 * Booting = **Y**;
 * UART = **Y**;
-* Display (via simple-framebuffer) - **N**;
+* Display - **N**;
 * Internal storage / eMMC - **Y**;
 * External storage / SD card - **N**;
 * Buttons - **N**;
