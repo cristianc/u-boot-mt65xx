@@ -5,7 +5,7 @@ MT6580: In 1st bootloader mode (replaces the `lk`).
 ## Status
 **Y** = works;\
 **P** = partially works;\
-**N** = does't work.
+**N** = doesn't work.
 
 ### MT6572
 * Booting = **Y**;
