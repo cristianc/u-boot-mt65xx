@@ -5,17 +5,16 @@ MT6580: In 1st bootloader mode (replaces the `lk`).
 ## Status
 **Y** = works;\
 **P** = partially works;\
-**N** = does't work;\
-**N/A** = untested / unknown.
+**N** = does't work.
 
 ### MT6572
 * Booting = **Y**;
 * UART = **Y**;
 * Display (via simple-framebuffer) - **Y**;
-* Internal storage / eMMC - **N/A**;
-* External storage / SD card - **N/A**;
-* Buttons - **N/A**;
-* USB - **N/A**;
+* Internal storage / eMMC - **N**;
+* External storage / SD card - **N**;
+* Buttons - **N**;
+* USB - **N**;
 
 ### MT6580
 * Booting = **Y**;
@@ -23,8 +22,8 @@ MT6580: In 1st bootloader mode (replaces the `lk`).
 * Display (via simple-framebuffer) - **N**;
 * Internal storage / eMMC - **Y**;
 * External storage / SD card - **N**;
-* Buttons - **N/A**;
-* USB - **N/A**;
+* Buttons - **N**;
+* USB - **N**;
 
 ## Building
 ### MT6572
