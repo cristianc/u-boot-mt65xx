@@ -8,8 +8,8 @@ MT6580: In 1st bootloader mode (replaces the `lk`).
 **N** = doesn't work.
 
 ### MT6572
-* Booting = **Y**;
-* UART = **Y**;
+* Booting - **Y**;
+* UART - **Y**;
 * Display - **Y** (simple-framebuffer);
 * Internal storage / eMMC - **N**;
 * External storage / SD card - **N**;
@@ -17,8 +17,8 @@ MT6580: In 1st bootloader mode (replaces the `lk`).
 * USB - **N**;
 
 ### MT6580
-* Booting = **Y**;
-* UART = **Y**;
+* Booting - **Y**;
+* UART - **Y**;
 * Display - **N**;
 * Internal storage / eMMC - **Y**;
 * External storage / SD card - **N**;
