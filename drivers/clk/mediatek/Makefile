@@ -3,6 +3,9 @@
 obj-$(CONFIG_ARCH_MEDIATEK) += clk-mtk.o
 
 # SoC Drivers
+# HACK: Enable MT7623 CLK driver for MT6572 too
+# TODO: Write MT6572 CLK driver and get rid of this
+obj-$(CONFIG_TARGET_MT6572) += clk-mt7623.o
 obj-$(CONFIG_TARGET_MT6580) += clk-mt6580.o
 obj-$(CONFIG_TARGET_MT7623) += clk-mt7623.o
 obj-$(CONFIG_TARGET_MT7622) += clk-mt7622.o
