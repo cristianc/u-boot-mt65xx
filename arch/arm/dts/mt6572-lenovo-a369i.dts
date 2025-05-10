@@ -1,10 +1,13 @@
 /dts-v1/;
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/gpio/gpio.h>
 #include "mt6572.dtsi"
+#include "mt6323.dtsi"
 #include "skeleton.dtsi"
 
 / {
   model = "Lenovo A369i";
-	compatible = "lenovo,a369i", "mediatek,mt6572";
+	compatible = "lenovo,a369i";
 
 	chosen {
 		tick-timer = &gpt;
@@ -16,8 +19,8 @@
 		device_type = "memory";
 		reg = <0x80000000 0x20000000>;
 	};
-
-	// use framebuffer set up by stock lk 
+	
+	/* HACK: Use framebuffer set up by previous LK bootloader */
 	fb0: framebuffer@9fa00000 {
 		compatible = "simple-framebuffer";
 		reg = <0x9fa00000 (480 * 800 * 2)>;
@@ -28,6 +31,23 @@
 		status = "okay";
 	};
 	
+	/* Vol +/- are connected GPIO, PWRKEY is connected to PMIC */
+	/*gpio-keys {
+		compatible = "gpio-keys";
+		
+		vol-up {
+			label = "Volume Up";
+			linux,code = <KEY_VOLUMEUP>;
+			gpios = <&gpio 110 GPIO_ACTIVE_LOW>;
+		};
+
+		vol-down {
+			label = "Volume Down";
+			linux,code = <KEY_VOLUMEDOWN>;
+			gpios = <&gpio 107 GPIO_ACTIVE_LOW>;
+		};
+	};*/
+
 	reg_1p8v: regulator-1p8v {
 		compatible = "regulator-fixed";
 		regulator-name = "fixed-1.8V";
