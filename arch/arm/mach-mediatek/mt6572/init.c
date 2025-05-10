@@ -1,7 +1,6 @@
 #include <config.h>
 #include <init.h>
 #include <asm/global_data.h>
-//#include <linux/io.h>
 #include <linux/sizes.h>
 #include <asm/arch/misc.h>
 
