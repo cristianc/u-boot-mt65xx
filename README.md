@@ -1,6 +1,9 @@
 # "Das U-Boot" for MediaTek MT6572/MT6580
-MT6572: In 2nd bootloader mode (replaces the kernel);\
-MT6580: In 1st bootloader mode (replaces the `lk`).
+## Supported devices
+### MT6572
+Lenovo A369i: U-Boot replaces the kernel;
+### MT6580
+Prestigio Multipad Wize 3151 (MT8321): U-Boot replaces the LK.
 
 ## Status
 **Y** = works;\
@@ -21,7 +24,7 @@ MT6580: In 1st bootloader mode (replaces the `lk`).
 * UART - **Y**;
 * Display - **N**;
 * Internal storage / eMMC - **Y**;
-* External storage / SD card - **N**;
+* External storage / SD card - **Y**;
 * Buttons - **N**;
 * USB - **N**;
 
