@@ -1,10 +1,6 @@
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/phy/phy.h>
-#include <dt-bindings/gpio/gpio.h>
-#include <dt-bindings/clock/mt7623-clk.h>
-#include <dt-bindings/power/mt7623-power.h>
-#include <dt-bindings/reset/mt7623-reset.h>
 
 / {
 	compatible = "mediatek,mt6572";
@@ -84,7 +80,7 @@
 			#clock-cells = <1>;
 		};
   
-  		wdt: watchdog@10007000 {
+  	wdt: watchdog@10007000 {
 			compatible = "mediatek,mt6589-wdt";
 			reg = <0x10007000 0x100>;
 			timeout-sec = <15>;
@@ -120,9 +116,29 @@
 			interrupt-parent = <&gic>;
 			reg = <0x10211000 0x1000>,
       			<0x10212000 0x2000>,
-            	<0x10214000 0x2000>,
-            	<0x10216000 0x2000>;
+            <0x10214000 0x2000>,
+            <0x10216000 0x2000>;
 		};
+		
+		pinctrl: pinctrl@10005000 {
+			compatible = "mediatek,mt6572-pinctrl";
+			reg = <0x10005000 0x1000>,
+            <0x10014000 0x1000>,
+            <0x10015000 0x1000>,
+            <0x10016000 0x1000>,
+            <0x10017000 0x1000>;
+    	reg-names = "gpio", "iocfg_t", "iocfg_b", "iocfg_l", "iocfg_r";		
+    	
+    	gpio: gpio-controller {
+        gpio-controller;
+        #gpio-cells = <2>;
+      };
+		};
+		
+    pwrap: pwrap@1000f000 {
+      compatible = "mediatek,mt6572-pwrap";
+      reg = <0x1000f000 0x1000>;
+    };
 
 		uart0: serial@11005000 {
 			compatible = "mediatek,mt6577-uart";
