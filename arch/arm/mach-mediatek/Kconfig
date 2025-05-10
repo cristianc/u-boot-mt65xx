@@ -176,7 +176,8 @@ config MTK_BROM_HEADER_INFO
 	string
 	default "media=nor" if TARGET_MT8518 || TARGET_MT8512 || TARGET_MT7629
 	default "media=emmc" if TARGET_MT8516 || TARGET_MT8365 || TARGET_MT8183
-	default "lk=1" if TARGET_MT7623 || TARGET_MT6572 || TARGET_MT6580
+	default "lk=1" if TARGET_MT7623 || TARGET_MT6580
+	default "lk=1;lkname=LK" if TARGET_MT6572
 
 config MTK_TZ_MOVABLE
 	select ARCH_MISC_INIT
