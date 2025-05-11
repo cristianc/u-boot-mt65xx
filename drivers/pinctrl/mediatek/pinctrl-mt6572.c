@@ -668,7 +668,7 @@ static int mtk_pinctrl_mt6572_probe(struct udevice *dev)
 }
 
 static const struct udevice_id mt6572_pctrl_match[] = {
-  {.compatible = "mediatek,mt6572-pinctrl" },
+  { .compatible = "mediatek,mt6572-pinctrl" },
   { }
 };
 
