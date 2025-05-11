@@ -7,7 +7,13 @@ config BOARD_A369I
 	bool "Lenovo A369i board"
 	select TARGET_MT6572
 	help
-		Enable support Lenovo A369i (phone) board based on MT6572 SoC
+		Enable support for Lenovo A369i (phone) board based on MT6572 SoC
+
+config BOARD_D101
+	bool "JTY D101 board"
+	select TARGET_MT6572
+	help
+		Enable support for JTY D101 (tablet) board based on MT6572 SoC
 
 endchoice
 
@@ -149,6 +155,7 @@ endchoice
 
 config SYS_BOARD
 	string "Board name"
+	default "d101" if BOARD_D101
 	default "a369i" if BOARD_A369I
 	default "mt6580" if TARGET_MT6580
 	default "mt7622" if TARGET_MT7622
@@ -169,6 +176,7 @@ config SYS_BOARD
 	  be used.
 
 config SYS_CONFIG_NAME
+	default "d101" if BOARD_D101
 	default "a369i" if BOARD_A369I
 	default "mt6580" if TARGET_MT6580
 	default "mt7622" if TARGET_MT7622

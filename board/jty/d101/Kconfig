@@ -1,0 +1,12 @@
+if BOARD_D101
+
+config SYS_BOARD
+	default "D101"
+
+config SYS_VENDOR
+	default "jty"
+
+config SYS_CONFIG_NAME
+	default "d101"
+
+endif
