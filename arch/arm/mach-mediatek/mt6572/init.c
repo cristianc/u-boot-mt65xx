@@ -5,12 +5,6 @@
 
 DECLARE_GLOBAL_DATA_PTR;
 
-int dram_init(void)
-{
-	/* DRAM size is initialized in board files, not here */
-	return 0;
-}
-
 int print_cpuinfo(void)
 {
 	printf("SoC:   MediaTek MT6572\n");
