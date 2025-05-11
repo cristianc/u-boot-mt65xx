@@ -1,15 +1,16 @@
 if ARCH_MEDIATEK
 
 choice 
-	prompt "Mediatek based board select"
+	prompt "MediaTek SoC-based board select"
 
 config BOARD_A369I
 	bool "Lenovo A369i board"
 	select TARGET_MT6572
 	help
-		Lenovo A369i board based on MT6572 SoC
+		Enable support Lenovo A369i (phone) board based on MT6572 SoC
 
 endchoice
+
 
 config SYS_SOC
 	default "mediatek"
