@@ -1,0 +1,12 @@
+if BOARD_A369I
+
+config SYS_BOARD
+	default "a369i"
+
+config SYS_VENDOR
+	default "lenovo"
+
+config SYS_CONFIG_NAME
+	default "a369i"
+
+endif
