@@ -29,7 +29,7 @@ Prestigio Multipad Wize 3151 (MT8321): U-Boot replaces the LK.
 * USB - **N**;
 
 ## Building
-### MT6572
+### Lenovo A369i (MT6572)
 1. Run the `build_mt6572.sh` build script:
 ```
 ./build_mt6572.sh
