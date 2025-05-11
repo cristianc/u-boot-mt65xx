@@ -95,14 +95,6 @@
 			clock-names = "system-clk", "rtc32k";
 		};
 		
-		sysirq: interrupt-controller@10200100 {
-			compatible = "mediatek,mt6577-sysirq";
-			interrupt-controller;
-			#interrupt-cells = <3>;
-			interrupt-parent = <&gic>;
-			reg = <0x10200100 0x1c>;
-		};
-		
 		apmixedsys: clock-controller@10205000 {
 			compatible = "mediatek,mt7623-apmixedsys";
 			reg = <0x10205000 0x1000>;
