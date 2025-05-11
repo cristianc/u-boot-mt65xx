@@ -12,7 +12,7 @@ rm_prev_file() {
 
 build_uboot() {
   echo "building u-boot..."
-  ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out mt6572_defconfig
+  ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out a369i_defconfig
   ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out -j$(nproc --all)
   echo "u-boot build is done!"
 }
