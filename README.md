@@ -1,7 +1,8 @@
 # "Das U-Boot" for MediaTek MT6572/MT6580
 ### Supported devices
 #### MT6572
-Lenovo A369i: U-Boot replaces the kernel.
+Lenovo A369i: U-Boot replaces the kernel;
+JTY D101: U-Boot replaces the LK(?).
 #### MT6580
 Prestigio Multipad Wize 3151 (MT8321): U-Boot replaces the LK.
 
@@ -36,16 +37,21 @@ Prestigio Multipad Wize 3151 (MT8321): U-Boot replaces the LK.
 ```
 2. Profit
 
-### MT6580
-1. `make` the defconfig:
+### JTY D101 (MT6572)
+1. Enter:
 ```
-ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out mt6580_defconfig
-```
-2. Build `U-Boot` itself:
-```
+ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out d101_defconfig
 ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out -j$(nproc --all)
 ```
-3. Profit
+2. Profit
+
+### MT6580
+1. Enter:
+```
+ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out mt6580_defconfig
+ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out -j$(nproc --all)
+```
+2. Profit
 
 ## Flashing
 ### MT6572
