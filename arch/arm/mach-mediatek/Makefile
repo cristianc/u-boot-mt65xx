@@ -4,6 +4,7 @@ obj-y	+= cpu.o
 obj-$(CONFIG_MTK_TZ_MOVABLE)	+= tzcfg.o
 obj-$(CONFIG_XPL_BUILD)	+= spl.o
 
+obj-$(CONFIG_BOARD_A369I) += ../../../board/lenovo/a369i/
 obj-$(CONFIG_TARGET_MT6572) += mt6572/
 obj-$(CONFIG_TARGET_MT6580) += mt6580/
 obj-$(CONFIG_TARGET_MT7622) += mt7622/

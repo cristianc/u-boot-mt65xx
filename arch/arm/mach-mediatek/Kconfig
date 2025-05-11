@@ -1,5 +1,16 @@
 if ARCH_MEDIATEK
 
+choice 
+	prompt "Mediatek based board select"
+
+config BOARD_A369I
+	bool "Lenovo A369i board"
+	select TARGET_MT6572
+	help
+		Lenovo A369i board based on MT6572 SoC
+
+endchoice
+
 config SYS_SOC
 	default "mediatek"
 
@@ -14,7 +25,7 @@ config TARGET_MT6572
 	select CPU_V7A
 	select MMC_SUPPORTS_TUNING
 	help
-		The MediaTek MT6572 is a ARMv7-based SoC with a 2x Cortex-A7...
+		The MediaTek MT6572 is a ARMv7-based SoC with 2x ARM Cortex-A7 cores.
 
 config TARGET_MT6580
 	bool "MediaTek MT6580 SoC"
@@ -137,7 +148,7 @@ endchoice
 
 config SYS_BOARD
 	string "Board name"
-	default "mt6572" if TARGET_MT6572
+	default "a369i" if BOARD_A369I
 	default "mt6580" if TARGET_MT6580
 	default "mt7622" if TARGET_MT7622
 	default "mt7623" if TARGET_MT7623
@@ -157,7 +168,7 @@ config SYS_BOARD
 	  be used.
 
 config SYS_CONFIG_NAME
-	default "mt6572" if TARGET_MT6572
+	default "a369i" if BOARD_A369I
 	default "mt6580" if TARGET_MT6580
 	default "mt7622" if TARGET_MT7622
 	default "mt7623" if TARGET_MT7623
