@@ -1,0 +1,12 @@
+if BOARD_YARISXL
+
+config SYS_BOARD
+	default "yarisxl"
+
+config SYS_VENDOR
+	default "alcatel"
+
+config SYS_CONFIG_NAME
+	default "yarisxl"
+
+endif

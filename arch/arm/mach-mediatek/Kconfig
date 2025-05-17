@@ -15,6 +15,12 @@ config BOARD_D101
 	help
 		Enable support for JTY D101 (tablet) board based on MT6572 SoC
 
+config BOARD_YARISXL
+	bool "Alcatel yarisxl board"
+	select TARGET_MT6582
+	help
+		Enable support for Alcatel yarisxl (phone) board based on MT6582 SoC
+
 endchoice
 
 
@@ -162,6 +168,7 @@ endchoice
 
 config SYS_BOARD
 	string "Board name"
+	default "yarisxl" if BOARD_YARISXL
 	default "d101" if BOARD_D101
 	default "a369i" if BOARD_A369I
 	default "mt6580" if TARGET_MT6580
@@ -183,6 +190,7 @@ config SYS_BOARD
 	  be used.
 
 config SYS_CONFIG_NAME
+	default "yarisxl" if BOARD_YARISXL
 	default "d101" if BOARD_D101
 	default "a369i" if BOARD_A369I
 	default "mt6580" if TARGET_MT6580
