@@ -10,6 +10,7 @@ obj-$(CONFIG_BOARD_D101) += ../../../board/jty/d101/
 # SoC targets
 obj-$(CONFIG_TARGET_MT6572) += mt6572/
 obj-$(CONFIG_TARGET_MT6580) += mt6580/
+obj-$(CONFIG_TARGET_MT6582) += mt6582/
 obj-$(CONFIG_TARGET_MT7622) += mt7622/
 obj-$(CONFIG_TARGET_MT7623) += mt7623/
 obj-$(CONFIG_TARGET_MT7629) += mt7629/

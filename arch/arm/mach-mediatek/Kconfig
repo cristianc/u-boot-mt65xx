@@ -41,6 +41,13 @@ config TARGET_MT6580
 	help
 		The MediaTek MT6580 is a ARMv7-based SoC with a 4x Cortex-A7...
 
+config TARGET_MT6582
+	bool "MediaTek MT6582 SoC"
+	select CPU_V7A
+	select MMC_SUPPORTS_TUNING
+	help
+		The MediaTek MT6582 is a ARMv7-based SoC with 4x ARM Cortex-A7 cores.
+
 config TARGET_MT7622
 	bool "MediaTek MT7622 SoC"
 	select ARM64
@@ -196,7 +203,7 @@ config MTK_BROM_HEADER_INFO
 	string
 	default "media=nor" if TARGET_MT8518 || TARGET_MT8512 || TARGET_MT7629
 	default "media=emmc" if TARGET_MT8516 || TARGET_MT8365 || TARGET_MT8183
-	default "lk=1" if TARGET_MT7623 || TARGET_MT6580
+	default "lk=1" if TARGET_MT7623 || TARGET_MT6580 || TARGET_MT6582
 	default "lk=1;lkname=LK" if TARGET_MT6572
 
 config MTK_TZ_MOVABLE
