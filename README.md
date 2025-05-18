@@ -6,6 +6,8 @@ Lenovo A369i: U-Boot replaces the kernel;\
 JTY D101: U-Boot replaces the LK(?).
 #### MT6580
 Prestigio Multipad Wize 3151 (MT8321): U-Boot replaces the LK.
+#### MT6582
+Alcatel OT-7041D: U-Boot replaces the kernel - quirky. See board commit message.
 
 **Y** = works;\
 **P** = partially works;\
@@ -26,6 +28,15 @@ Prestigio Multipad Wize 3151 (MT8321): U-Boot replaces the LK.
 * Display - **N**;
 * Internal storage / eMMC - **Y**;
 * External storage / SD card - **Y**;
+* Buttons - **N**;
+* USB - **N**;
+
+### MT6582
+* Booting - **Y**;
+* UART - **Y**;
+* Display - **Y** (simple-framebuffer);
+* Internal storage / eMMC - **N**;
+* External storage / SD card - **N**;
 * Buttons - **N**;
 * USB - **N**;
 
@@ -53,6 +64,13 @@ ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out -j$(nproc --all)
 ```
 2. Profit
 
+### Alcatel OT-7041D (MT6582)
+1. Run the `build_mt6582.sh` build script:
+```
+./build_mt6582.sh
+```
+2. Profit
+
 ## Flashing
 ### MT6572
 1. Power off the device
@@ -71,3 +89,11 @@ mtk w lk out/u-boot-mtk.bin
 ```
 3. Connect to the PC with a USB cable
 4. Profit
+
+### MT6582
+1. Power off the device
+2. Run SP Flash Tool
+3. Select scatter file, then **BOOTIMG** and choose u-boot-mt6582.img
+4. Press **Download**
+5. Connect to the PC with a USB cable
+6. Profit
