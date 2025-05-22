@@ -1,7 +1,7 @@
 /dts-v1/;
 #include "mt6582.dtsi"
 #include "skeleton.dtsi"
-#include "mt6323.dtsi"
+//#include "mt6323.dtsi"
 
 / {
   model = "Huawei Honor Holly/3C Lite (Hol-U19)";
