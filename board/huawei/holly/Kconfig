@@ -1,0 +1,12 @@
+if BOARD_YARISXL
+
+config SYS_BOARD
+	default "holly"
+
+config SYS_VENDOR
+	default "huawei"
+
+config SYS_CONFIG_NAME
+	default "holly"
+
+endif
