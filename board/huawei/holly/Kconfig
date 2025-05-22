@@ -1,4 +1,4 @@
-if BOARD_YARISXL
+if BOARD_HOLLY
 
 config SYS_BOARD
 	default "holly"
