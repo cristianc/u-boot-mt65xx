@@ -22,9 +22,9 @@
 	fb0: framebuffer@9fa00000 {
 		compatible = "simple-framebuffer";
 		reg = <0x9fa00000 (1280 * 720 * 4)>;
-		width = <1280>;
-		height = <720>;
-		stride = <(1280 * 4)>;
+		width = <720>;
+		height = <1280>;
+		stride = <(720 * 4)>;
 		format = "r5g6b5";
 		status = "okay";
 	};
