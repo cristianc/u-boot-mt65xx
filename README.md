@@ -8,6 +8,7 @@ JTY D101: U-Boot replaces the LK(?).
 Prestigio Multipad Wize 3151 (MT8321): U-Boot replaces the LK.
 #### MT6582
 Alcatel OT-7041D: U-Boot replaces the kernel - quirky. See board commit message.
+Huawei Honor Holly/3C Lite: U-Boot replaces the kernel. Probably same thing as the Alcatel, not sure.
 
 **Y** = works;\
 **P** = partially works;\
@@ -70,6 +71,20 @@ ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out -j$(nproc --all)
 ./build_mt6582.sh
 ```
 2. Profit
+### Honor Holly (MT6582)
+1. Compile:
+```
+ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out huawei_holly_defconfig.
+ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out -j$(nproc --all)
+```
+2. Pack into a boot.img:
+```
+dd if=/dev/random of=/tmp/ramdisk-dummy bs=2048 count=9
+tools/mtk-mkimage ROOTFS /tmp/ramdisk-dummy /tmp/ramdisk-dummy.mtk
+tools/mtk-mkimage KERNEL out/u-boot.bin /tmp/u-boot.bin.mtk
+mkbootimg-osm0sis --kernel /tmp/u-boot.bin.mtk --ramdisk /tmp/ramdisk-dummy.mtk -o u-boot-mt6582.img
+```
+3. Profit
 
 ## Flashing
 ### MT6572
