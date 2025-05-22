@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export var=$1
 rm_prev_file() {
   prev_file="u-boot-mt6582.img"
   if [ -f $prev_file ]; then
@@ -9,11 +9,10 @@ rm_prev_file() {
     echo "previous u-boot image not found..."
   fi
 }
-
 build_uboot() {
   echo "building u-boot..."
-  ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out yarisxl_defconfig
-  ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out -j$(nproc --all)
+  ARCH=arm CROSS_COMPILE=arm-none-eabi- make O=out $1
+  ARCH=arm CROSS_COMPILE=arm-none-eabi- make O=out -j$(nproc --all)
   echo "u-boot build is done!"
 }
 
@@ -42,9 +41,8 @@ tmp_cleanup() {
 
 main() {
   rm_prev_file
-  build_uboot
+  build_uboot $var
   make_android_bootimg
   tmp_cleanup
 }
-
 main

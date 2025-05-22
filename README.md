@@ -68,23 +68,15 @@ ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out -j$(nproc --all)
 ### Alcatel OT-7041D (MT6582)
 1. Run the `build_mt6582.sh` build script:
 ```
-./build_mt6582.sh
+./build_mt6582.sh yarisxl_defconfig
 ```
 2. Profit
 ### Honor Holly (MT6582)
-1. Compile:
+1. Run the build script:
 ```
-ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out huawei_holly_defconfig.
-ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make O=out -j$(nproc --all)
+./build_mt6582.sh huawei_holly_defconfig
 ```
-2. Pack into a boot.img:
-```
-dd if=/dev/random of=/tmp/ramdisk-dummy bs=2048 count=9
-tools/mtk-mkimage ROOTFS /tmp/ramdisk-dummy /tmp/ramdisk-dummy.mtk
-tools/mtk-mkimage KERNEL out/u-boot.bin /tmp/u-boot.bin.mtk
-mkbootimg-osm0sis --kernel /tmp/u-boot.bin.mtk --ramdisk /tmp/ramdisk-dummy.mtk -o u-boot-mt6582.img
-```
-3. Profit
+2. Profit.
 
 ## Flashing
 ### MT6572
