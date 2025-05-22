@@ -20,6 +20,7 @@ config BOARD_YARISXL
 	select TARGET_MT6582
 	help
 		Enable support for Alcatel yarisxl (phone) board based on MT6582 SoC
+
 config BOARD_HOLLY
 	bool "Huawei holly board"
 	select TARGET_MT6582
