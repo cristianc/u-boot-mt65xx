@@ -1,4 +1,6 @@
 /dts-v1/;
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/gpio/gpio.h>
 #include "mt6582.dtsi"
 #include "skeleton.dtsi"
 #include "mt6323.dtsi"
@@ -28,7 +30,22 @@
 		format = "r5g6b5";
 		status = "okay";
 	};
-	
+	/* Vol +/- are connected GPIO, PWRKEY is connected to PMIC */
+	gpio-keys {
+		compatible = "gpio-keys";
+		
+		vol-up {
+			label = "Volume Up";
+			linux,code = <KEY_VOLUMEUP>;
+			gpios = <&gpio 110 GPIO_ACTIVE_LOW>;
+		};
+
+		vol-down {
+			label = "Volume Down";
+			linux,code = <KEY_VOLUMEDOWN>;
+			gpios = <&gpio 107 GPIO_ACTIVE_LOW>;
+		};
+	};
 	reg_1p8v: regulator-1p8v {
 		compatible = "regulator-fixed";
 		regulator-name = "fixed-1.8V";
@@ -54,7 +71,7 @@
 		regulator-max-microvolt = <5000000>;
 		regulator-boot-on;
 		regulator-always-on;
-	}; 
+	};
 };
 
 &uart0 {
