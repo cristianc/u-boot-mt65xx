@@ -41,7 +41,7 @@ tmp_cleanup() {
 
 main() {
   rm_prev_file
-  build_uboot $var
+  #build_uboot $var
   make_android_bootimg
   tmp_cleanup
 }

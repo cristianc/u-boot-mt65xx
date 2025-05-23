@@ -124,7 +124,7 @@
 			      <0x10216000 0x2000>;
 		};
 		
-/*		pinctrl: pinctrl@10005000 {
+		pinctrl: pinctrl@10005000 {
 			compatible = "mediatek,mt6572-pinctrl";
 			reg = <0x10005000 0x1000>,
             <0x10014000 0x1000>,
@@ -142,7 +142,7 @@
     pwrap: pwrap@1000f000 {
       compatible = "mediatek,mt6572-pwrap";
       reg = <0x1000f000 0x1000>;
-    }; */
+    };
 
 		uart0: serial@11002000 {
 			compatible = "mediatek,mt6577-uart";
