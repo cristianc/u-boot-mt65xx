@@ -7,8 +7,8 @@ JTY D101: U-Boot replaces the LK(?).
 #### MT6580
 Prestigio Multipad Wize 3151 (MT8321): U-Boot replaces the LK.
 #### MT6582
-Alcatel OT-7041D: U-Boot replaces the kernel - quirky. See board commit message.
-Huawei Honor Holly/3C Lite: U-Boot replaces the kernel. Probably same thing as the Alcatel, not sure.
+Alcatel OT-7041D: U-Boot replaces the kernel - quirky. See board commit message.\
+Huawei Honor Holly/3C Lite: U-Boot replaces the kernel. Broken framebuffer.
 
 **Y** = works;\
 **P** = partially works;\
