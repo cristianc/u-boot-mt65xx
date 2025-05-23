@@ -1,12 +1,12 @@
 /dts-v1/;
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/gpio/gpio.h>
-#include "skeleton.dtsi"
 #include "mt6572.dtsi"
-//#include "mt6323.dtsi"
+#include "mt6323.dtsi"
+#include "skeleton.dtsi"
 
 / {
-  	model = "Lenovo A369i";
+  model = "Lenovo A369i";
 	compatible = "lenovo,a369i";
 
 	chosen {
