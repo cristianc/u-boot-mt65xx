@@ -1897,6 +1897,8 @@ static const struct msdc_compatible mt8183_compat = {
 };
 
 static const struct udevice_id msdc_ids[] = {
+	/* They should be compatible */
+	{ .compatible = "mediatek,mt6572-mmc", .data = (ulong)&mt7623_compat },
 	{ .compatible = "mediatek,mt7620-mmc", .data = (ulong)&mt7620_compat },
 	{ .compatible = "mediatek,mt7621-mmc", .data = (ulong)&mt7621_compat },
 	{ .compatible = "mediatek,mt7622-mmc", .data = (ulong)&mt7622_compat },
