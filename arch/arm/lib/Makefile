@@ -68,7 +68,6 @@ obj-$(CONFIG_FSL_LAYERSCAPE) += ccn504.o
 ifneq ($(CONFIG_GICV2)$(CONFIG_GICV3),)
 obj-y	+= gic_64.o
 endif
-obj-$(CONFIG_DRIVER_GICV2)	+= gic-v2.o
 obj-$(CONFIG_GIC_V3_ITS)	+= gic-v3-its.o
 obj-y	+= interrupts_64.o
 else
@@ -77,6 +76,7 @@ endif
 ifndef CONFIG_$(PHASE_)SYSRESET
 obj-y	+= reset.o
 endif
+obj-y += gic-v2.o
 
 obj-y	+= cache.o
 obj-$(CONFIG_SYS_ARM_CACHE_CP15)	+= cache-cp15.o
