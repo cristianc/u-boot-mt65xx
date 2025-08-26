@@ -309,7 +309,7 @@ static const struct dm_serial_ops mtk_serial_ops = {
 static const struct udevice_id mtk_serial_ids[] = {
 	{ .compatible = "mediatek,hsuart" },
 	{ .compatible = "mediatek,mt6577-uart" },
-	{ .compatible = "mediatek,mt6572-uart" }
+	{ .compatible = "mediatek,mt6572-uart" },
 	{ }
 };
 
