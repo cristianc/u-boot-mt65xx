@@ -9,6 +9,15 @@ config SYS_VENDOR
 choice
 	prompt "MediaTek board select"
 
+config TARGET_MT6572
+	bool "MediaTek MT6572 SoC"
+	select CPU_V7A
+	select DEBUG_UART_BOARD_INIT
+	select MMC_SUPPORTS_TUNING
+	help
+		The MT6572 is a low-end ARMv7-A (32-bit) MediaTek SoC with 
+		2x ARM Cortex-A7 cores released in 2013.
+
 config TARGET_MT7622
 	bool "MediaTek MT7622 SoC"
 	select ARM64
@@ -123,6 +132,7 @@ endchoice
 
 config SYS_BOARD
 	string "Board name"
+	default "mt6572" if TARGET_MT6572
 	default "mt7622" if TARGET_MT7622
 	default "mt7623" if TARGET_MT7623
 	default "mt7629" if TARGET_MT7629
@@ -141,6 +151,7 @@ config SYS_BOARD
 	  be used.
 
 config SYS_CONFIG_NAME
+	default "mt6572" if TARGET_MT6572
 	default "mt7622" if TARGET_MT7622
 	default "mt7623" if TARGET_MT7623
 	default "mt7629" if TARGET_MT7629
@@ -159,6 +170,7 @@ config MTK_BROM_HEADER_INFO
 	default "media=nor" if TARGET_MT8518 || TARGET_MT8512 || TARGET_MT7629
 	default "media=emmc" if TARGET_MT8516 || TARGET_MT8365 || TARGET_MT8183
 	default "lk=1" if TARGET_MT7623
+	default "lk=1;lkname=LK" if TARGET_MT6572
 
 config MTK_TZ_MOVABLE
 	select ARCH_MISC_INIT
