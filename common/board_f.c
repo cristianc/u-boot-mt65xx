@@ -259,6 +259,7 @@ static int show_dram_config(void)
 		print_size(size, ")");
 	}
 	board_add_ram_info(0);
+	printf(" @ 0x%08lx", (ulong)CFG_SYS_SDRAM_BASE);
 	putc('\n');
 
 	return 0;
