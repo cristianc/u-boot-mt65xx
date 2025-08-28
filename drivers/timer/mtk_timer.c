@@ -34,6 +34,17 @@ struct mtk_timer_priv {
 	unsigned int gpt4_offset;
 };
 
+unsigned long timer_early_get_rate(void)
+{
+    return 13000000;
+}
+
+u64 timer_early_get_count(void)
+{
+    u32 val = readl(0x10008000 + MTK_GPT4_OFFSET_V1 + MTK_GPT_CNT);
+    return timer_conv_64(val);
+}
+
 static u64 mtk_timer_get_count(struct udevice *dev)
 {
 	struct mtk_timer_priv *priv = dev_get_priv(dev);
