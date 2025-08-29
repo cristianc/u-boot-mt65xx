@@ -40,6 +40,9 @@ static void mtk_gpt_early_init(void)
 
 void board_debug_uart_init(void)
 {
+  /* This is called right before switching the mode UART1 pins */ 
+  set_armpll();
+
   /* 
 	 * HACK: At some point, the preloader (our previous stage)
    * switches the aux mode of URXD1, UTXD1 pins to "MD debug"; 
@@ -58,9 +61,6 @@ void board_debug_uart_init(void)
   val &= ~(0x7 << 0);
   val |=  (0x1 << 0); 
   writel(val, 0x100053d0);
-
-  /* This is called immediately after switching the aux mode of UART1 pins */
-  set_armpll();
 
   mtk_gpt_early_init();
 }
