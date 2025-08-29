@@ -1,7 +1,7 @@
 /* 
- * All of the important code happens in 
- * arch/arm/mach-mediatek/mt6572/...; this is just a placeholder
- * so that U-Boot doesn't complain.
+ * All of the important stuff happens in 
+ * arch/arm/mach-mediatek/mt6572/init.c; this is here
+ * just so that U-Boot doesn't complain about an undefined reference.
  */
 int board_init(void)
 {

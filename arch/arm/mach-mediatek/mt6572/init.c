@@ -33,7 +33,7 @@ static void uart1_gpio_init(void)
    * switches the aux mode of URXD1, UTXD1 pins to "MD debug"; 
    * LK switches them back early before printing the first ever log line.
    * We replicate what LK does to be able to see logs.
-	*/
+	 */
   u32 val;
 
 	/* Pin 103 (URXD1) */
