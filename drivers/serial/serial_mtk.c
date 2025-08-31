@@ -294,7 +294,8 @@ static int mtk_serial_of_to_plat(struct udevice *dev)
 	priv->force_highspeed = dev_read_bool(dev, "mediatek,force-highspeed");
 	priv->upstream_highspeed_logic =
 		device_is_compatible(dev, "mediatek,mt6577-uart") || 
-		device_is_compatible(dev, "mediatek,mt6572-uart");
+		device_is_compatible(dev, "mediatek,mt6572-uart") ||
+		device_is_compatible(dev, "mediatek,mt6582-uart");
 
 	return 0;
 }
@@ -310,6 +311,7 @@ static const struct udevice_id mtk_serial_ids[] = {
 	{ .compatible = "mediatek,hsuart" },
 	{ .compatible = "mediatek,mt6577-uart" },
 	{ .compatible = "mediatek,mt6572-uart" },
+	{ .compatible = "mediatek,mt6582-uart" },
 	{ }
 };
 
